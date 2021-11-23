@@ -12,7 +12,7 @@ struct ContentView: View {
         ZStack {
             // Background gradient
             LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color.white]),
+                gradient: Gradient(colors: [Color.blue, Color("LightBlue")]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             ).edgesIgnoringSafeArea(.all)
@@ -45,6 +45,20 @@ struct ContentView: View {
                 // Weather status ends
                 
                 Spacer()
+                
+                // Days
+                HStack(spacing: 20) {
+                    
+                    BanaBirGunVerin(dayOfWeek: "MON", imageName: "cloud.sun.fill", celcius: 18)
+                    BanaBirGunVerin(dayOfWeek: "TUE", imageName: "cloud.drizzle.fill", celcius: 12)
+                    BanaBirGunVerin(dayOfWeek: "WED", imageName: "wind.snow", celcius: 8)
+                    BanaBirGunVerin(dayOfWeek: "THU", imageName: "cloud.sun.rain.fill", celcius: 10)
+                    BanaBirGunVerin(dayOfWeek: "FRI", imageName: "cloud.bolt.rain.fill", celcius: 8)
+                    
+                }
+                // Days ends
+                
+                Spacer()
             } // Main Content Ends
         }
     }
@@ -53,5 +67,30 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct BanaBirGunVerin: View {
+    
+    var dayOfWeek: String
+    var imageName: String
+    var celcius: CGFloat
+    
+    var body: some View {
+        VStack {
+            Text(dayOfWeek)
+                .font(.system(size: 14, weight: .semibold, design: .default))
+                .foregroundColor(.white)
+            
+            Image(systemName: imageName)
+                .renderingMode(.original)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40, alignment: .center)
+            
+            Text("\(Int(celcius))°")
+                .foregroundColor(.white)
+                .font(.system(size: 28, weight: .bold))
+        }
     }
 }
