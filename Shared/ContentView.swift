@@ -42,10 +42,9 @@ struct ContentView: View {
                         .foregroundColor(.white)
                     
                 }
+                .padding(.bottom, 60)
                 // Weather status ends
-                
-                Spacer()
-                
+                                
                 // Days
                 HStack(spacing: 20) {
                     
@@ -58,6 +57,19 @@ struct ContentView: View {
                 }
                 // Days ends
                 
+                Spacer()
+                
+                // Button Starts
+                Button {
+                    print("anan")
+                } label: {
+                    Text("Search Again")
+                        .frame(width: 280, height: 50)
+                        .background(Color.white)
+                        .cornerRadius(5.0)
+                        .font(.system(size: 20, weight: .semibold))
+                }
+                // Buttons Ends
                 Spacer()
             } // Main Content Ends
         }
