@@ -11,38 +11,16 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             // Background gradient
-            LinearGradient(
-                gradient: Gradient(colors: [Color.blue, Color("LightBlue")]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            ).edgesIgnoringSafeArea(.all)
+            BackgroundGradient(startColor: Color.blue, endColor: Color("LightBlue"))
             // Background gradient ends
             
             VStack { // Main Content
                 
                 // City Name
-                Text("Çanakkale, TR")
-                    .font(
-                        .system(size: 32, weight: .medium, design: .rounded)
-                    )
-                    .foregroundColor(.white)
-                    .padding()
+                CityNameText(cityName: "Çanakkale, TR")
                 
                 // Weather Status Icon and weather in degrees
-                VStack(spacing: 8) {
-                    Image(systemName: "cloud.sun.fill")
-                        .renderingMode(.original)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 180, height: 180, alignment: .center)
-                    
-                    
-                    Text("18°")
-                        .font(.system(size: 70, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                    
-                }
-                .padding(.bottom, 60)
+                CurrentWeatherStatus(imageName: "cloud.sun.fill", degrees: 16)
                 // Weather status ends
                                 
                 // Days
@@ -60,15 +38,7 @@ struct ContentView: View {
                 Spacer()
                 
                 // Button Starts
-                Button {
-                    print("anan")
-                } label: {
-                    Text("Search Again")
-                        .frame(width: 280, height: 50)
-                        .background(Color.white)
-                        .cornerRadius(5.0)
-                        .font(.system(size: 20, weight: .semibold))
-                }
+                SearchButton()
                 // Buttons Ends
                 Spacer()
             } // Main Content Ends
@@ -103,6 +73,71 @@ struct BanaBirGunVerin: View {
             Text("\(Int(celcius))°")
                 .foregroundColor(.white)
                 .font(.system(size: 28, weight: .bold))
+        }
+    }
+}
+
+struct BackgroundGradient: View {
+    
+    var startColor: Color
+    var endColor: Color
+    
+    var body: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [startColor, endColor]),
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        ).edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct CityNameText: View {
+    
+    var cityName: String
+    
+    var body: some View {
+        Text(cityName)
+            .font(
+                .system(size: 32, weight: .medium, design: .rounded)
+            )
+            .foregroundColor(.white)
+            .padding()
+    }
+}
+
+struct CurrentWeatherStatus: View {
+    
+    var imageName: String
+    var degrees: CGFloat
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: imageName)
+                .renderingMode(.original)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 180, height: 180, alignment: .center)
+            
+            
+            Text("\(Int(degrees))°")
+                .font(.system(size: 70, weight: .semibold, design: .rounded))
+                .foregroundColor(.white)
+            
+        }
+        .padding(.bottom, 60)
+    }
+}
+
+struct SearchButton: View {
+    var body: some View {
+        Button {
+            print("anan")
+        } label: {
+            Text("Search Again")
+                .frame(width: 280, height: 50)
+                .background(Color.white)
+                .cornerRadius(5.0)
+                .font(.system(size: 20, weight: .semibold))
         }
     }
 }
